@@ -26,29 +26,37 @@ const App = () => {
     return (
         <div className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
             {/* Header y Navegación */}
-            <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-gray-100">
+            <header className="bg-black/95 backdrop-blur-sm shadow-2xl sticky top-0 z-50 border-b border-gray-800">
                 <nav className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 max-w-7xl">
-                    <a href="#inicio" className="text-3xl font-bold text-indigo-600 hover:text-indigo-700 hover:scale-105 transition-all duration-300">
-                        EmprendeHoy
+                    <a href="#inicio" className="group flex items-center space-x-3 hover:scale-105 transition-all duration-300">
+                        <img 
+                            src="/logo.png" 
+                            alt="Logo de EmprenFactor" 
+                            className="h-16 w-auto md:h-20 lg:h-24 transition-all duration-300 group-hover:brightness-110 group-hover:drop-shadow-lg"
+                        />
                     </a>
                     
                     {/* Navegación Desktop */}
-                    <div className="hidden md:flex space-x-8">
-                        <a href="#inicio" className="text-gray-700 hover:text-indigo-600 font-semibold transition duration-300 relative group">
-                            Inicio
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                    <div className="hidden md:flex space-x-1">
+                        <a href="#inicio" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
+                            <span className="relative z-10">Inicio</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
+                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
                         </a>
-                        <a href="#articulos" className="text-gray-700 hover:text-indigo-600 font-semibold transition duration-300 relative group">
-                            Artículos
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                        <a href="#articulos" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
+                            <span className="relative z-10">Artículos</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
+                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
                         </a>
-                        <a href="#acerca" className="text-gray-700 hover:text-indigo-600 font-semibold transition duration-300 relative group">
-                            Acerca de
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                        <a href="#acerca" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
+                            <span className="relative z-10">Acerca de</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
+                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
                         </a>
-                        <a href="#contacto" className="text-gray-700 hover:text-indigo-600 font-semibold transition duration-300 relative group">
-                            Contacto
-                            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-600 to-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                        <a href="#contacto" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
+                            <span className="relative z-10">Contacto</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
+                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
                         </a>
                     </div>
                     
@@ -56,7 +64,7 @@ const App = () => {
                     <div className="md:hidden">
                         <button 
                             onClick={toggleMenu}
-                            className="text-gray-700 hover:text-indigo-600 focus:outline-none focus:text-indigo-600 transition-colors duration-200"
+                            className="text-white hover:text-orange-500 focus:outline-none focus:text-orange-500 transition-colors duration-200 p-2 rounded-lg hover:bg-white/10"
                             aria-label="Abrir menú"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,35 +78,35 @@ const App = () => {
                     </div>
                 </nav>
 
-                {/* Menú móvil */}
+                {/* Menú móvil actualizado */}
                 {isMenuOpen && (
-                    <div className="md:hidden bg-white border-t border-gray-100 shadow-lg">
+                    <div className="md:hidden bg-black/95 border-t border-gray-700 shadow-lg">
                         <div className="px-4 py-2 space-y-1">
                             <a 
                                 href="#inicio" 
                                 onClick={closeMenu}
-                                className="block px-3 py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 font-semibold transition-all duration-200 rounded-lg"
+                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
                             >
                                 Inicio
                             </a>
                             <a 
                                 href="#articulos" 
                                 onClick={closeMenu}
-                                className="block px-3 py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 font-semibold transition-all duration-200 rounded-lg"
+                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
                             >
                                 Artículos
                             </a>
                             <a 
                                 href="#acerca" 
                                 onClick={closeMenu}
-                                className="block px-3 py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 font-semibold transition-all duration-200 rounded-lg"
+                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
                             >
                                 Acerca de
                             </a>
                             <a 
                                 href="#contacto" 
                                 onClick={closeMenu}
-                                className="block px-3 py-3 text-gray-700 hover:text-indigo-600 hover:bg-gray-50 font-semibold transition-all duration-200 rounded-lg"
+                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
                             >
                                 Contacto
                             </a>
@@ -119,10 +127,10 @@ const App = () => {
                     
                     <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
                         <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                                Posts <span className="bg-gradient-to-r from-indigo-600 to-blue-400 bg-clip-text text-transparent">Destacados</span>
+                            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
+                                Posts <span className="text-transparent" style={{background: 'linear-gradient(90deg, #f89831, #000000)', WebkitBackgroundClip: 'text', backgroundClip: 'text'}}>Destacados</span>
                             </h2>
-                            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
                                 Descubre nuestros artículos más populares y aprende de los mejores expertos
                             </p>
                         </div>

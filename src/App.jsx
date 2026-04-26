@@ -1,168 +1,249 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomeSection from './components/HomeSection';
 import PostCard from './components/PostCard';
 import BlogArticlesSection from './components/BlogArticlesSection';
+import CommunitySection from './components/CommunitySection';
 import AboutUsSection from './components/AboutUsSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
+import PostPage from './components/PostPage';
 import { blogPosts } from './data/blogPosts';
 
-const App = () => {
-    const [filterCategory, setFilterCategory] = useState(null);
+// ── Shared Header ──────────────────────────────────────────────────
+const Header = ({ navLinks }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const displayedPosts = filterCategory 
-        ? blogPosts.filter(post => post.category === filterCategory) 
-        : blogPosts;
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
-
-    const closeMenu = () => {
-        setIsMenuOpen(false);
-    };
-
     return (
-        <div className="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
-            {/* Header y Navegación */}
-            <header className="bg-black/95 backdrop-blur-sm shadow-2xl sticky top-0 z-50 border-b border-gray-800">
-                <nav className="container mx-auto flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 max-w-7xl">
-                    <a href="#inicio" className="group flex items-center space-x-3 hover:scale-105 transition-all duration-300">
-                        <img 
-                            src="/logo.png" 
-                            alt="Logo de EmprenFactor" 
-                            className="h-16 w-auto md:h-20 lg:h-24 transition-all duration-300 group-hover:brightness-110 group-hover:drop-shadow-lg"
-                        />
-                    </a>
-                    
-                    {/* Navegación Desktop */}
-                    <div className="hidden md:flex space-x-1">
-                        <a href="#inicio" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
-                            <span className="relative z-10">Inicio</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
-                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
+        <header style={{
+            position: 'sticky',
+            top: 0,
+            zIndex: 50,
+            background: 'rgba(13,13,13,0.97)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
+            borderBottom: '1px solid rgba(255,255,255,0.07)',
+        }}>
+            {/* Top amber accent line */}
+            <div style={{
+                position: 'absolute',
+                top: 0, left: 0, right: 0,
+                height: '2px',
+                background: 'linear-gradient(90deg, var(--amber) 0%, transparent 55%)',
+            }} />
+
+            <nav style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '0 clamp(1.5rem, 5%, 5rem)',
+                maxWidth: '1400px',
+                margin: '0 auto',
+                height: '70px',
+            }}>
+                {/* Logo */}
+                <a
+                    href="/"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexShrink: 0,
+                        transition: 'opacity 0.2s ease',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.8'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                >
+                    <img
+                        src="/logo.png"
+                        alt="EmprenFactor"
+                        style={{ height: '60px', width: 'auto' }}
+                    />
+                </a>
+
+                {/* Desktop Nav */}
+                <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}
+                    className="desktop-nav">
+                    {navLinks.map(link => (
+                        <a key={link.label} href={link.href} className="nav-link">
+                            {link.label}
                         </a>
-                        <a href="#articulos" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
-                            <span className="relative z-10">Artículos</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
-                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
-                        </a>
-                        <a href="#acerca" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
-                            <span className="relative z-10">Acerca de</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
-                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
-                        </a>
-                        <a href="#contacto" className="relative px-4 py-2 text-white hover:text-orange-500 font-semibold transition-all duration-300 rounded-lg group overflow-hidden">
-                            <span className="relative z-10">Contacto</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-black/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-lg"></div>
-                            <div className="absolute -bottom-1 left-1/2 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 transition-all duration-300 group-hover:w-full group-hover:left-0"></div>
-                        </a>
-                    </div>
-                    
-                    {/* Botón de menú móvil */}
-                    <div className="md:hidden">
-                        <button 
-                            onClick={toggleMenu}
-                            className="text-white hover:text-orange-500 focus:outline-none focus:text-orange-500 transition-colors duration-200 p-2 rounded-lg hover:bg-white/10"
-                            aria-label="Abrir menú"
+                    ))}
+                </div>
+
+                {/* Mobile hamburger */}
+                <button
+                    onClick={() => setIsMenuOpen(prev => !prev)}
+                    className="mobile-menu-btn"
+                    aria-label="Abrir menú"
+                    style={{
+                        background: 'none',
+                        border: '1px solid rgba(255,255,255,0.12)',
+                        color: 'rgba(255,255,255,0.7)',
+                        width: '38px', height: '38px',
+                        display: 'none',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        borderRadius: '2px',
+                        padding: 0,
+                        transition: 'border-color 0.2s ease',
+                        flexShrink: 0,
+                    }}
+                >
+                    {isMenuOpen ? (
+                        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    ) : (
+                        <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    )}
+                </button>
+            </nav>
+
+            {/* Mobile menu */}
+            {isMenuOpen && (
+                <div style={{
+                    borderTop: '1px solid rgba(255,255,255,0.07)',
+                    background: 'rgba(10,10,10,0.98)',
+                }}>
+                    {navLinks.map(link => (
+                        <a
+                            key={link.label}
+                            href={link.href}
+                            className="mobile-nav-link"
+                            onClick={() => setIsMenuOpen(false)}
                         >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                {isMenuOpen ? (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                ) : (
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                                )}
-                            </svg>
-                        </button>
-                    </div>
-                </nav>
+                            {link.label}
+                        </a>
+                    ))}
+                </div>
+            )}
 
-                {/* Menú móvil actualizado */}
-                {isMenuOpen && (
-                    <div className="md:hidden bg-black/95 border-t border-gray-700 shadow-lg">
-                        <div className="px-4 py-2 space-y-1">
-                            <a 
-                                href="#inicio" 
-                                onClick={closeMenu}
-                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
-                            >
-                                Inicio
-                            </a>
-                            <a 
-                                href="#articulos" 
-                                onClick={closeMenu}
-                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
-                            >
-                                Artículos
-                            </a>
-                            <a 
-                                href="#acerca" 
-                                onClick={closeMenu}
-                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
-                            >
-                                Acerca de
-                            </a>
-                            <a 
-                                href="#contacto" 
-                                onClick={closeMenu}
-                                className="block px-3 py-3 text-white hover:text-orange-500 hover:bg-white/10 font-semibold transition-all duration-200 rounded-lg"
-                            >
-                                Contacto
-                            </a>
-                        </div>
-                    </div>
-                )}
-            </header>
-
-            <main>
-                <HomeSection />
-
-                {/* Contenido Destacado */}
-                <section className="py-20 bg-white relative overflow-hidden">
-                    {/* Decoración de fondo */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-50"></div>
-                    <div className="absolute top-10 right-10 w-72 h-72 bg-gradient-to-br from-blue-400/10 to-indigo-600/10 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-10 left-10 w-72 h-72 bg-gradient-to-br from-purple-500/10 to-blue-400/10 rounded-full blur-3xl"></div>
-                    
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative">
-                        <div className="text-center mb-16">
-                            <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">
-                                Posts <span className="text-transparent" style={{background: 'linear-gradient(90deg, #f89831, #000000)', WebkitBackgroundClip: 'text', backgroundClip: 'text'}}>Destacados</span>
-                            </h2>
-                            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-                                Descubre nuestros artículos más populares y aprende de los mejores expertos
-                            </p>
-                        </div>
-                        
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {blogPosts.slice(0, 3).map((post, index) => (
-                                <div 
-                                    key={post.id} 
-                                    className="animate-fade-in-up"
-                                    style={{ animationDelay: `${index * 0.1}s` }}
-                                >
-                                    <PostCard 
-                                        title={post.title}
-                                        description={post.excerpt}
-                                        imageUrl={post.imageUrl}
-                                        category={post.category}
-                                        date={post.date}
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-                
-                <BlogArticlesSection posts={displayedPosts} setFilter={setFilterCategory} />
-                <AboutUsSection />
-                <ContactSection />
-            </main>
-
-            <Footer />
-        </div>
+            <style>{`
+                @media (max-width: 768px) {
+                    .desktop-nav { display: none !important; }
+                    .mobile-menu-btn { display: flex !important; }
+                }
+            `}</style>
+        </header>
     );
 };
+
+// ── Main (home) page ───────────────────────────────────────────────
+const MainPage = () => {
+    const [filterCategory, setFilterCategory] = useState(null);
+
+    const displayedPosts = filterCategory
+        ? blogPosts.filter(post => post.category === filterCategory)
+        : blogPosts;
+
+    return (
+        <main>
+            <HomeSection />
+
+            {/* Featured Posts */}
+            <section style={{
+                background: '#ffffff',
+                padding: 'clamp(4rem, 8vh, 7rem) clamp(1.5rem, 6%, 7rem)',
+                borderTop: '1px solid var(--border)',
+            }}>
+                <div style={{ marginBottom: '3rem' }}>
+                    <div className="eyebrow animate-fade-in-up">Selección editorial</div>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-end',
+                        gap: '1rem',
+                        flexWrap: 'wrap',
+                    }}>
+                        <h2
+                            className="animate-fade-in-up delay-1"
+                            style={{
+                                fontFamily: 'var(--font-display)',
+                                fontWeight: 600,
+                                fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                                lineHeight: 1.1,
+                                letterSpacing: '-0.02em',
+                                color: 'var(--black)',
+                            }}
+                        >
+                            Artículos Destacados
+                        </h2>
+                        <a
+                            href="#articulos"
+                            className="animate-fade-in-up delay-2"
+                            style={{
+                                fontFamily: 'var(--font-body)',
+                                fontSize: '0.8rem',
+                                fontWeight: 600,
+                                letterSpacing: '0.1em',
+                                textTransform: 'uppercase',
+                                color: 'var(--amber)',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.4rem',
+                                whiteSpace: 'nowrap',
+                                paddingBottom: '0.4rem',
+                                transition: 'gap 0.2s ease',
+                            }}
+                            onMouseEnter={e => e.currentTarget.style.gap = '0.7rem'}
+                            onMouseLeave={e => e.currentTarget.style.gap = '0.4rem'}
+                        >
+                            Ver todos <span>→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
+                    gap: '1.5rem',
+                }}>
+                    {blogPosts.slice(0, 3).map((post, index) => (
+                        <div key={post.id} className={`animate-fade-in-up delay-${index + 2}`}>
+                            <PostCard
+                                title={post.title}
+                                description={post.excerpt}
+                                imageUrl={post.imageUrl}
+                                category={post.category}
+                                date={post.date}
+                                slug={post.slug}
+                            />
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <BlogArticlesSection posts={displayedPosts} setFilter={setFilterCategory} />
+            <CommunitySection />
+            <AboutUsSection />
+            <ContactSection />
+        </main>
+    );
+};
+
+// ── Root App ───────────────────────────────────────────────────────
+const navLinks = [
+    { label: 'Inicio',     href: '/#inicio' },
+    { label: 'Artículos',  href: '/#articulos' },
+    { label: 'Comunidad',  href: '/#comunidad' },
+    { label: 'Acerca de', href: '/#acerca' },
+    { label: 'Contacto',  href: '/#contacto' },
+];
+
+const App = () => (
+    <BrowserRouter>
+        <div style={{ minHeight: '100vh', background: 'var(--cream)' }}>
+            <Header navLinks={navLinks} />
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/articulos/:slug" element={<PostPage />} />
+            </Routes>
+            <Footer />
+        </div>
+    </BrowserRouter>
+);
 
 export default App;

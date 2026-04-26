@@ -1,12 +1,108 @@
-# React + Vite
+# Blog Emprendimiento
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Blog sobre emprendimiento y desarrollo empresarial, construido con React + Vite + Tailwind CSS.
 
-Currently, two official plugins are available:
+## Descripcion
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Plataforma de contenido enfocada en emprendedores de habla hispana. Incluye articulos sobre finanzas, productividad, marketing digital e ideas de negocio, con busqueda y filtrado por categorias, formulario de contacto y enlaces a redes sociales.
 
-## Expanding the ESLint configuration
+## Stack tecnologico
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Tecnologia | Version | Uso |
+|---|---|---|
+| React | 18.3.1 | Framework UI |
+| Vite | 5.3.1 | Build tool + HMR |
+| Tailwind CSS | 3.4.4 | Estilos utilitarios |
+| React Icons | 5.5.0 | Iconos (WhatsApp, LinkedIn, Facebook) |
+| PostCSS + Autoprefixer | — | Procesamiento CSS |
+
+## Estructura del proyecto
+
+```
+blog-emprendimiento/
+├── public/
+│   ├── emprenfactorico.ico         # Favicon del sitio
+│   ├── google9373939301eb96bc.html # Verificacion Google Search Console
+│   ├── lider.webp                  # Imagen del autor
+│   └── logo.png                    # Logo principal
+├── src/
+│   ├── components/
+│   │   ├── HomeSection.jsx         # Hero section
+│   │   ├── BlogArticlesSection.jsx # Listado con busqueda y filtros
+│   │   ├── PostCard.jsx            # Tarjeta de articulo
+│   │   ├── AboutUsSection.jsx      # Seccion del autor
+│   │   ├── ContactSection.jsx      # Formulario y redes sociales
+│   │   └── Footer.jsx              # Pie de pagina
+│   ├── data/
+│   │   └── blogPosts.js            # Datos de los articulos
+│   ├── App.jsx                     # Componente raiz + navegacion
+│   ├── main.jsx                    # Punto de entrada React
+│   └── index.css                   # Estilos globales + Tailwind
+├── vite.config.js
+├── tailwind.config.js
+└── package.json
+```
+
+## Instalacion y uso
+
+```bash
+# Clonar el repositorio
+git clone <url-del-repositorio>
+cd blog-emprendimiento
+
+# Instalar dependencias
+npm install
+
+# Iniciar servidor de desarrollo
+npm run dev
+
+# Build de produccion
+npm run build
+
+# Vista previa del build
+npm run preview
+
+# Linting
+npm run lint
+```
+
+## Funcionalidades
+
+- **Navegacion responsiva** con menu hamburguesa en mobile
+- **Hero section** con CTA hacia los articulos
+- **Articulos destacados** (top 3) en la pagina principal
+- **Busqueda** de articulos por titulo en tiempo real
+- **Filtrado por categorias**: Finanzas, Productividad, Marketing Digital, Ideas de Negocio
+- **Seccion del autor** con bio y foto
+- **Formulario de contacto** con validacion
+- **Redes sociales**: WhatsApp, LinkedIn, Facebook
+
+## Paleta de colores
+
+| Color | Hex | Uso |
+|---|---|---|
+| Naranja principal | `#f89831` | Acento de marca, botones, badges |
+| Naranja hover | `#d67419` | Estados hover |
+| Negro | `#000000` | Fondo header, textos principales |
+| Gris oscuro | `#333333` | Fondos secundarios |
+| Blanco | `#ffffff` | Fondo principal |
+| Gris claro | `#f5f5f5` | Fondos sutiles |
+
+## Agregar articulos
+
+Los articulos se gestionan en `src/data/blogPosts.js`. Cada entrada sigue esta estructura:
+
+```js
+{
+  id: 7,
+  title: "Titulo del articulo",
+  category: "Finanzas", // Finanzas | Productividad | Marketing Digital | Ideas de Negocio
+  date: "23 de marzo, 2026",
+  excerpt: "Descripcion breve del articulo...",
+  imageUrl: "https://url-de-la-imagen.jpg"
+}
+```
+
+## SEO
+
+El sitio esta verificado en **Google Search Console** mediante el archivo `public/google9373939301eb96bc.html`.

@@ -1,51 +1,49 @@
 const blogPosts = [
     {
         id: 1,
-        title: "La importancia de un plan de negocios sólido",
-        category: "Finanzas",
-        date: "15 de octubre, 2024",
-        excerpt: "Un plan de negocios no es solo un documento formal; es tu hoja de ruta para el éxito. Te ayuda a definir tus objetivos, entender tu mercado y anticipar posibles desafíos...",
-        imageUrl: "https://placehold.co/600x400/000000/FFFFFF?text=Post+4"
+        slug: 'el-emprendedor-nace-o-se-hace',
+        title: '¿El emprendedor nace o se hace?',
+        category: 'Liderazgo',
+        date: '20 de abril, 2026',
+        readTime: 5,
+        excerpt: 'El debate sobre si el emprendedor nace o se hace ha estado presente durante años. Con 11 años trabajando con jóvenes en educación técnica y programas de emprendimiento, mi respuesta es clara: el emprendedor se hace en el camino.',
+        imageUrl: '/ImgArt/EmprendedorNace.webp',
+        content: [
+            'El debate sobre si el emprendedor nace o se hace ha estado presente durante años en aulas, conferencias y conversaciones entre quienes trabajamos en este mundo. Antes de plantear mi postura, quiero dejar claro que respeto profundamente el punto de vista de colegas que se dedican a la enseñanza del emprendimiento y que defienden distintas posiciones. Sin embargo, lo que comparto aquí no es solo teoría, sino el resultado de 11 años trabajando con jóvenes entre 14 y 30 años en educación técnica, universitaria y programas de emprendimiento.',
+            'Desde esa experiencia, he podido observar algo muy claro: el emprendedor se hace en el camino. No se trata únicamente de tener talento o ciertas cualidades desde joven. Claro, hay personas que parecen más seguras, más creativas o más decididas, pero eso no define el futuro de nadie. Lo que realmente construye a un emprendedor es el desarrollo constante de habilidades que se van formando en la vida diaria.',
+            'He visto jóvenes que al inicio tenían miedo de participar en clase, pero poco a poco comenzaron a expresar sus ideas. Esa simple acción —hablar, opinar, equivocarse— es el inicio del desarrollo de la comunicación, una habilidad clave en el emprendimiento.',
+            'También he visto estudiantes que no sabían organizar su tiempo. Entregaban tarde, se sentían abrumados, no lograban cumplir. Pero con acompañamiento y práctica, empezaron a planificarse mejor. Aprendieron a priorizar tareas, a cumplir con fechas. Esa disciplina no solo mejora el rendimiento académico, también forma la base de cualquier persona que quiera emprender.',
+            'Otro ejemplo muy común es el manejo de la frustración. Muchos jóvenes, cuando algo no les sale bien, tienden a rendirse rápido. Pero cuando aprenden a insistir, a intentar nuevamente, a entender que el error es parte del proceso, están desarrollando resiliencia. Y esa es una de las habilidades más importantes en el mundo del emprendimiento.',
+            'Incluso algo tan cotidiano como trabajar en grupo aporta mucho. Aprender a escuchar, a respetar ideas distintas, a llegar a acuerdos, a asumir responsabilidades dentro de un equipo… todo eso construye habilidades que luego se reflejan en cualquier iniciativa que emprendan en el futuro.',
+            'El emprendimiento no empieza cuando alguien abre un negocio. Empieza mucho antes, cuando una persona decide mejorar, aprender y asumir retos personales. Está en quien decide ser más responsable, en quien se atreve a salir de su zona de confort, en quien busca soluciones en lugar de excusas.',
+            'Por eso, más que pensar en el emprendimiento como algo reservado para unos pocos, deberíamos entenderlo como un proceso de formación personal. Un camino donde cada día se construyen habilidades que, con el tiempo, permiten a una persona generar valor, liderar y crear oportunidades.',
+            'Al final, el emprendedor no nace con todo resuelto. Se forma en lo cotidiano, en lo simple, en lo constante. Se hace.',
+        ],
     },
     {
         id: 2,
-        title: "Herramientas de IA que todo emprendedor debe conocer",
-        category: "Productividad",
-        date: "10 de octubre, 2024",
-        excerpt: "La inteligencia artificial ya no es el futuro, es el presente. Descubre cómo estas herramientas pueden automatizar tareas, analizar datos y optimizar tus operaciones...",
-        imageUrl: "https://placehold.co/600x400/000000/FFFFFF?text=Post+5"
-    },
-    {
-        id: 3,
-        title: "Construye tu marca personal desde cero",
-        category: "Marketing Digital",
-        date: "5 de octubre, 2024",
-        excerpt: "Tu marca personal es lo que te diferencia. En este artículo, te guiamos a través de los pasos clave para definir tu identidad y comunicarla de manera efectiva...",
-        imageUrl: "https://placehold.co/600x400/000000/FFFFFF?text=Post+6"
-    },
-    {
-        id: 4,
-        title: "10 Ideas de Negocio Rentables para Principiantes",
-        category: "Ideas de Negocio",
-        date: "28 de septiembre, 2023",
-        excerpt: "Descubre oportunidades que no requieren una gran inversión inicial y que puedes comenzar hoy mismo.",
-        imageUrl: "https://placehold.co/600x400/000000/FFFFFF?text=Post+1"
-    },
-    {
-        id: 5,
-        title: "Marketing Digital para Startups: Guía Esencial",
-        category: "Marketing Digital",
-        date: "20 de septiembre, 2023",
-        excerpt: "Aprende a construir una presencia en línea sólida y a atraer a tus primeros clientes de forma efectiva.",
-        imageUrl: "https://placehold.co/600x400/000000/FFFFFF?text=Post+2"
-    },
-    {
-        id: 6,
-        title: "Cómo Conseguir Financiamiento para tu Proyecto",
-        category: "Finanzas",
-        date: "15 de septiembre, 2024",
-        excerpt: "Exploramos las mejores opciones, desde el bootstraping hasta la búsqueda de inversores ángeles.",
-        imageUrl: "https://placehold.co/600x400/000000/FFFFFF?text=Post+3"
+        slug: 'emprendimiento-femenino-en-nicaragua',
+        title: 'Emprendimiento femenino en Nicaragua: de la necesidad al impacto económico',
+        category: 'Emprendimiento',
+        date: '22 de abril, 2026',
+        readTime: 7,
+        excerpt: 'En Nicaragua, el emprendimiento tiene rostro femenino. Más del 70% de los emprendimientos surgen por necesidad y cerca del 47% del trabajo por cuenta propia es realizado por mujeres. Un análisis de su impacto económico real.',
+        imageUrl: '/ImgArt/EmprendedorFemenino.webp',
+        content: [
+            'En los últimos años, el emprendimiento femenino ha tomado fuerza en América Latina, posicionando a la región como una de las más activas del mundo. Según el Global Entrepreneurship Monitor (GEM), aproximadamente el 33% de las mujeres en la región tiene intención de emprender y cerca del 21% ya participa en la creación de negocios (GEM, 2024).',
+            'Esto refleja la integración de las mujeres en Latinoamérica en el sistema económico, diseñando nuevos negocios que demuestran que no solo participan en la economía, sino que están creando sus propias oportunidades. Sin embargo, cuando llevamos este análisis al contexto nicaragüense, la realidad muestra una cara más profunda.',
+            'En Nicaragua, el emprendimiento tiene rostro femenino. La mujer genera y contribuye a la productividad del país por medio de la creación de pequeñas empresas en sectores de tercerización. Es un reto y una agenda pendiente su integración en el sistema de transformación de la materia prima.',
+            'En el contexto nicaragüense, el emprendimiento no siempre nace de una oportunidad identificada o de una planificación estratégica. En muchos casos, surge como una respuesta directa a las condiciones del entorno: más del 70% de los emprendimientos en el país se originan por necesidad, reflejando la búsqueda de ingresos inmediatos ante la falta de empleo formal.',
+            'Datos de la Encuesta Continua de Hogares del INIDE muestran que entre el 45% y el 47.6% del trabajo por cuenta propia en Nicaragua es realizado por mujeres (INIDE, 2021). Este dato evidencia que las mujeres no solo participan, sino que están fuertemente representadas en el autoempleo, uno de los principales espacios donde se desarrolla el emprendimiento en el país.',
+            'Detrás de estos números hay realidades concretas. Muchas mujeres emprenden porque necesitan generar ingresos para su hogar, enfrentan limitaciones en el acceso al empleo formal, y buscan alternativas que les permitan conciliar responsabilidades familiares. El hecho de que cerca del 50% del trabajo por cuenta propia sea realizado por mujeres implica que una parte importante de la generación de ingresos en los hogares depende directamente de ellas.',
+            'Esta participación genera efectos concretos en la economía: apoyo económico del hogar —muchos negocios representan la principal fuente de ingresos familiares—, dinamización de la economía local al operar en sectores de consumo diario, y generación de empleo en pequeña escala. El contexto regional también indica una alta intención emprendedora femenina, lo que sugiere un potencial importante de crecimiento si se fortalecen las capacidades empresariales (GEM, 2024).',
+            'En Nicaragua, la mayoría de las mujeres emprendedoras no comienza en condiciones ideales; aun así, concentran sus esfuerzos en negocios pequeños, en su gran mayoría informales y orientados a la subsistencia. Su liderazgo no surge únicamente de mayores oportunidades, sino de una mayor presencia en contextos donde emprender es una necesidad.',
+            'Más que ver el emprendimiento femenino únicamente como una respuesta a la necesidad, el reto está en reconocer su verdadero potencial económico y productivo. Si casi la mitad del trabajo por cuenta propia en Nicaragua está en manos de mujeres, no se trata de algo poco relevante, sino de un pilar de la economía nacional. La diferencia entre subsistencia y crecimiento no está en la capacidad de estas emprendedoras, sino en las condiciones que las rodean. Fortalecer el acceso a financiamiento, formación empresarial y procesos de formalización tendría un efecto directo en la generación de empleo, la productividad y el desarrollo económico del país.',
+        ],
+        references: [
+            'Global Entrepreneurship Monitor (GEM). (2024). Global Entrepreneurship Monitor 2023/2024 Global Report. Global Entrepreneurship Research Association. https://www.gemconsortium.org/report',
+            'Instituto Nacional de Información de Desarrollo (INIDE). (2021). Encuesta Continua de Hogares (ECH): Indicadores del mercado laboral. Managua, Nicaragua. https://www.inide.gob.ni',
+        ],
     },
 ];
 

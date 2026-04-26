@@ -1,0 +1,31 @@
+// Reglas de seguridad para Firebase Firestore
+// Copia y pega esto en: Firebase Console > Firestore > Reglas
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Comentarios por artículo
+    // Estructura: /comments/{postId}/entries/{commentId}
+    match /comments/{postId}/entries/{commentId} {
+
+      // Cualquier visitante puede LEER comentarios aprobados
+      allow read: if resource.data.approved == true;
+
+      // Cualquier visitante puede CREAR un comentario nuevo
+      // (siempre llegan con approved: false para moderación)
+      allow create: if
+        request.resource.data.keys().hasAll(['name', 'comment', 'approved', 'timestamp']) &&
+        request.resource.data.approved == false &&
+        request.resource.data.name is string &&
+        request.resource.data.name.size() > 0 &&
+        request.resource.data.comment is string &&
+        request.resource.data.comment.size() > 10;
+
+      // Solo el dueño autenticado puede APROBAR o ELIMINAR comentarios
+      // (lo hace desde la Firebase Console usando su cuenta de Google)
+      allow update, delete: if request.auth != null;
+    }
+
+  }
+}

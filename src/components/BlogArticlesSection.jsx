@@ -1,72 +1,270 @@
 import React, { useState } from 'react';
-// PostCard ya no se importa aquí porque no se usa directamente en este componente.
+import { Link } from 'react-router-dom';
+
+const categoryColors = {
+    'Finanzas':          { bg: '#0d0d0d', text: '#f89831' },
+    'Productividad':     { bg: '#f89831', text: '#0d0d0d' },
+    'Marketing Digital': { bg: '#2a2a2a', text: '#f89831' },
+    'Ideas de Negocio':  { bg: '#f89831', text: '#0d0d0d' },
+};
 
 const BlogArticlesSection = ({ posts, setFilter }) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [activeCategory, setActiveCategory] = useState(null);
 
-    const filteredPosts = posts.filter(post => 
+    const filteredPosts = posts.filter(post =>
         post.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Corregido: Ahora se usan los datos de la prop 'posts' para generar las categorías
     const categories = [...new Set(posts.map(post => post.category))];
 
+    const handleFilter = (cat) => {
+        setActiveCategory(cat);
+        setFilter(cat);
+    };
+
     return (
-        <section id="articulos" className="py-12">
-            <h2 className="text-center font-bold text-black text-2xl mb-8">Todos los Artículos</h2>
-            <div className="flex flex-col md:flex-row md:space-x-8">
-                {/* Barra de búsqueda y categorías */}
-                <aside className="md:w-1/4 mb-8 md:mb-0">
-                    <div className="bg-white rounded-xl shadow-lg p-6">
-                        <div className="mb-6">
-                            <label htmlFor="search" className="block text-black font-bold mb-2">Buscar</label>
-                            <input 
-                                type="text" 
-                                id="search" 
-                                placeholder="Escribe para buscar..." 
-                                className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                style={{"--tw-ring-color": "#f89831"}}
+        <section
+            id="articulos"
+            style={{
+                background: 'var(--cream)',
+                padding: 'clamp(4rem, 8vh, 7rem) clamp(1.5rem, 6%, 7rem)',
+            }}
+        >
+            {/* Section Header */}
+            <div style={{ marginBottom: '3.5rem' }}>
+                <div className="eyebrow">Explorar</div>
+                <h2 style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 600,
+                    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+                    lineHeight: 1.1,
+                    letterSpacing: '-0.02em',
+                    color: 'var(--black)',
+                }}>
+                    Todos los Artículos
+                </h2>
+            </div>
+
+            <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'clamp(200px, 22%, 280px) 1fr',
+                gap: 'clamp(2rem, 4vw, 4rem)',
+                alignItems: 'start',
+            }}
+            className="articles-layout"
+            >
+                {/* Sidebar */}
+                <aside>
+                    {/* Search */}
+                    <div style={{ marginBottom: '2rem' }}>
+                        <label style={{
+                            display: 'block',
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '0.72rem',
+                            fontWeight: 600,
+                            letterSpacing: '0.16em',
+                            textTransform: 'uppercase',
+                            color: 'var(--warm-gray)',
+                            marginBottom: '0.6rem',
+                        }}>
+                            Buscar
+                        </label>
+                        <div style={{ position: 'relative' }}>
+                            <input
+                                type="text"
+                                placeholder="Buscar artículos..."
+                                className="ef-input"
                                 value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onChange={e => setSearchQuery(e.target.value)}
                             />
+                            <span style={{
+                                position: 'absolute', right: '0.85rem', top: '50%',
+                                transform: 'translateY(-50%)',
+                                color: 'var(--warm-gray)', fontSize: '0.85rem',
+                                pointerEvents: 'none',
+                            }}>⌕</span>
                         </div>
-                        <div>
-                            <h3 className="text-lg font-bold text-black mb-3">Categorías</h3>
-                            <ul className="space-y-2 text-gray-600">
-                                <li>
-                                    <button onClick={() => setFilter(null)} className="transition duration-200" style={{color: '#666'}} onMouseEnter={(e) => e.target.style.color = '#f89831'} onMouseLeave={(e) => e.target.style.color = '#666'}>
-                                        Todas las Categorías ({posts.length})
-                                    </button>
-                                </li>
-                                {categories.map(category => (
-                                    <li key={category}>
-                                        <button onClick={() => setFilter(category)} className="transition duration-200" style={{color: '#666'}} onMouseEnter={(e) => e.target.style.color = '#f89831'} onMouseLeave={(e) => e.target.style.color = '#666'}>
-                                            {category} ({posts.filter(p => p.category === category).length})
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
+                    </div>
+
+                    {/* Categories */}
+                    <div>
+                        <label style={{
+                            display: 'block',
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '0.72rem',
+                            fontWeight: 600,
+                            letterSpacing: '0.16em',
+                            textTransform: 'uppercase',
+                            color: 'var(--warm-gray)',
+                            marginBottom: '0.6rem',
+                        }}>
+                            Categorías
+                        </label>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+                            <button
+                                className={`cat-btn ${activeCategory === null ? 'active' : ''}`}
+                                onClick={() => handleFilter(null)}
+                            >
+                                <span>Todos</span>
+                                <span style={{
+                                    fontFamily: 'var(--font-display)',
+                                    fontSize: '1.1rem',
+                                    fontWeight: 600,
+                                }}>{posts.length}</span>
+                            </button>
+                            {categories.map(cat => (
+                                <button
+                                    key={cat}
+                                    className={`cat-btn ${activeCategory === cat ? 'active' : ''}`}
+                                    onClick={() => handleFilter(cat)}
+                                >
+                                    <span>{cat}</span>
+                                    <span style={{
+                                        fontFamily: 'var(--font-display)',
+                                        fontSize: '1.1rem',
+                                        fontWeight: 600,
+                                    }}>
+                                        {posts.filter(p => p.category === cat).length}
+                                    </span>
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </aside>
-                
-                {/* Lista de artículos */}
-                <div className="md:w-3/4">
-                    <div className="bg-white rounded-xl shadow-lg p-6 space-y-8">
-                        {filteredPosts.map(post => (
-                            <article key={post.id} className="border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
-                                <h3 className="text-2xl font-bold text-black mb-2">{post.title}</h3>
-                                <p className="text-gray-600 text-sm mb-3">Publicado el {post.date} en <span className="font-semibold" style={{color: '#f89831'}}>{post.category}</span></p>
-                                <p className="text-gray-700">{post.excerpt}</p>
-                                <a href="#" className="font-medium hover:underline mt-2 inline-block" style={{color: '#f89831'}}>Leer más →</a>
-                            </article>
-                        ))}
-                        {filteredPosts.length === 0 && (
-                            <p className="text-center text-gray-500">No se encontraron artículos.</p>
-                        )}
-                    </div>
+
+                {/* Articles List */}
+                <div>
+                    {filteredPosts.length === 0 ? (
+                        <div style={{
+                            padding: '4rem 0',
+                            textAlign: 'center',
+                            fontFamily: 'var(--font-display)',
+                            fontSize: '1.5rem',
+                            color: 'var(--warm-gray)',
+                            fontStyle: 'italic',
+                        }}>
+                            No se encontraron artículos.
+                        </div>
+                    ) : (
+                        filteredPosts.map((post, index) => {
+                            const colors = categoryColors[post.category] || { bg: '#0d0d0d', text: '#f89831' };
+                            const num = String(index + 1).padStart(2, '0');
+                            return (
+                                <article key={post.id} className="article-row">
+                                    <div style={{
+                                        display: 'grid',
+                                        gridTemplateColumns: 'auto 1fr',
+                                        gap: '1.5rem',
+                                        alignItems: 'start',
+                                    }}>
+                                        {/* Number */}
+                                        <div style={{
+                                            fontFamily: 'var(--font-display)',
+                                            fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
+                                            fontWeight: 300,
+                                            color: 'var(--border)',
+                                            lineHeight: 1,
+                                            letterSpacing: '-0.04em',
+                                            minWidth: '3.5rem',
+                                            userSelect: 'none',
+                                        }}>
+                                            {num}
+                                        </div>
+
+                                        {/* Content */}
+                                        <div>
+                                            {/* Meta */}
+                                            <div style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: '0.75rem',
+                                                marginBottom: '0.6rem',
+                                                flexWrap: 'wrap',
+                                            }}>
+                                                <span style={{
+                                                    background: colors.bg,
+                                                    color: colors.text,
+                                                    fontFamily: 'var(--font-body)',
+                                                    fontSize: '0.65rem',
+                                                    fontWeight: 700,
+                                                    letterSpacing: '0.14em',
+                                                    textTransform: 'uppercase',
+                                                    padding: '0.25rem 0.6rem',
+                                                    borderRadius: '2px',
+                                                }}>
+                                                    {post.category}
+                                                </span>
+                                                <span style={{
+                                                    fontFamily: 'var(--font-body)',
+                                                    fontSize: '0.78rem',
+                                                    color: 'var(--warm-gray)',
+                                                }}>
+                                                    {post.date}
+                                                </span>
+                                            </div>
+
+                                            {/* Title */}
+                                            <h3 style={{
+                                                fontFamily: 'var(--font-display)',
+                                                fontWeight: 600,
+                                                fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)',
+                                                lineHeight: 1.2,
+                                                letterSpacing: '-0.01em',
+                                                color: 'var(--black)',
+                                                marginBottom: '0.65rem',
+                                            }}>
+                                                {post.title}
+                                            </h3>
+
+                                            {/* Excerpt */}
+                                            <p style={{
+                                                fontFamily: 'var(--font-body)',
+                                                fontSize: '0.9rem',
+                                                color: 'var(--warm-gray)',
+                                                lineHeight: 1.7,
+                                                marginBottom: '1rem',
+                                                maxWidth: '620px',
+                                            }}>
+                                                {post.excerpt}
+                                            </p>
+
+                                            {/* Link */}
+                                            <Link
+                                                to={post.slug ? `/articulos/${post.slug}` : '#'}
+                                                style={{
+                                                    display: 'inline-flex',
+                                                    alignItems: 'center',
+                                                    gap: '0.35rem',
+                                                    fontFamily: 'var(--font-body)',
+                                                    fontSize: '0.75rem',
+                                                    fontWeight: 700,
+                                                    letterSpacing: '0.12em',
+                                                    textTransform: 'uppercase',
+                                                    color: 'var(--amber)',
+                                                    transition: 'gap 0.2s ease',
+                                                }}
+                                                onMouseEnter={e => e.currentTarget.style.gap = '0.65rem'}
+                                                onMouseLeave={e => e.currentTarget.style.gap = '0.35rem'}
+                                            >
+                                                Leer artículo <span>→</span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </article>
+                            );
+                        })
+                    )}
                 </div>
             </div>
+
+            <style>{`
+                @media (max-width: 768px) {
+                    .articles-layout {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };

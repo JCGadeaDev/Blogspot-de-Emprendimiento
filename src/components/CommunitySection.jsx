@@ -31,7 +31,10 @@ const CommunitySection = () => {
     try {
       const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json" // <-- Corrección 1: Agregado para evitar errores de CORS/Redirección
+        },
         body: JSON.stringify({
           _subject: `💡 Nueva propuesta de tema: "${form.topic}"`,
           nombre: form.name,
@@ -339,7 +342,6 @@ const CommunitySection = () => {
                   value={form.category}
                   onChange={handleChange}
                 >
-                  {/* Agregamos style={{ background: '#0d0d0d', color: '#ffffff' }} a las opciones */}
                   <option
                     value=""
                     style={{ background: "#0d0d0d", color: "#ffffff" }}
@@ -363,15 +365,15 @@ const CommunitySection = () => {
                 <label htmlFor="description" style={labelStyle}>
                   ¿Por qué es importante para ti?
                 </label>
+                {/* <-- Corrección 2: Se eliminó el "style={darkInputStyle}" duplicado */}
                 <textarea
                   id="description"
                   rows="4"
                   className="ef-input"
-                  style={darkInputStyle}
                   placeholder="Cuéntanos tu situación y por qué necesitas información sobre este tema..."
                   value={form.description}
                   onChange={handleChange}
-                  style={{ ...darkInputStyle, resize: "vertical" }}
+                  style={{ ...darkInputStyle, resize: "vertical" }} 
                 />
               </div>
 

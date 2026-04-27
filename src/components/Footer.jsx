@@ -146,7 +146,7 @@ const Footer = () => {
                     color: 'rgba(255,255,255,0.25)',
                     letterSpacing: '0.03em',
                 }}>
-                    © 2025 EmprenFactor. Todos los derechos reservados.
+                    © 2026 EmprenFactor. Todos los derechos reservados.
                 </span>
                 <span style={{
                     fontFamily: 'var(--font-body)',

@@ -1,10 +1,11 @@
 export const config = {
   matcher: '/articulos/:slug*',
+  runtime: 'edge',
 };
 
 export default async function middleware(request) {
   const url = new URL(request.url);
-  const slug = url.pathname.replace('/articulos/', '');
+  const slug = url.pathname.replace('/articulos/', '').split('?')[0];
 
   const posts = {
     'el-emprendedor-nace-o-se-hace': {
@@ -20,20 +21,21 @@ export default async function middleware(request) {
   };
 
   const post = posts[slug];
-  if (!post) return new Response(null, { status: 404 });
-
-  const canonicalUrl = `https://emprenfactor.vercel.app/articulos/${slug}`;
 
   const ua = request.headers.get('user-agent') || '';
   const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Slackbot|TelegramBot|Googlebot|bingbot/i.test(ua);
 
-  if (!isCrawler) {
-    // Usuario normal → dejar pasar al index.html (SPA)
+  if (!post || !isCrawler) {
+    // Dejar pasar al index.html normalmente
     return new Response(null, {
-      status: 302,
-      headers: { Location: canonicalUrl },
+      status: 200,
+      headers: {
+        'x-middleware-rewrite': `${url.origin}/index.html`,
+      },
     });
   }
+
+  const canonicalUrl = `https://emprenfactor.vercel.app/articulos/${slug}`;
 
   const html = `<!doctype html>
 <html lang="es">
@@ -56,7 +58,6 @@ export default async function middleware(request) {
   <meta name="twitter:image" content="${post.image}" />
 </head>
 <body>
-  <p>Cargando artículo...</p>
   <script>window.location.href = "${canonicalUrl}";</script>
 </body>
 </html>`;

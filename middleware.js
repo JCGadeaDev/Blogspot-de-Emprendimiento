@@ -56,6 +56,7 @@ export default async function middleware(request) {
   <meta name="twitter:title" content="${post.title}" />
   <meta name="twitter:description" content="${post.description}" />
   <meta name="twitter:image" content="${post.image}" />
+  <meta property="fb:app_id" content="1627314625047249" />
 </head>
 <body>
   <script>window.location.href = "${canonicalUrl}";</script>

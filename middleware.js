@@ -1,5 +1,3 @@
-import { NextResponse } from 'next/server';
-
 export const config = {
   matcher: '/articulos/:slug*',
 };
@@ -8,8 +6,6 @@ export default async function middleware(request) {
   const url = new URL(request.url);
   const slug = url.pathname.replace('/articulos/', '');
 
-  // Importar los posts directamente en el middleware no funciona en Edge,
-  // así que definimos un mapa estático generado desde tu blogPosts
   const posts = {
     'el-emprendedor-nace-o-se-hace': {
       title: '¿El emprendedor nace o se hace?',
@@ -24,27 +20,27 @@ export default async function middleware(request) {
   };
 
   const post = posts[slug];
-
-  // Si no existe el slug, dejar pasar normalmente
-  if (!post) return NextResponse.next();
+  if (!post) return new Response(null, { status: 404 });
 
   const canonicalUrl = `https://emprenfactor.vercel.app/articulos/${slug}`;
 
-  // Detectar si la petición viene de un bot/crawler (Facebook, Twitter, etc.)
   const ua = request.headers.get('user-agent') || '';
   const isCrawler = /facebookexternalhit|Twitterbot|LinkedInBot|WhatsApp|Slackbot|TelegramBot|Googlebot|bingbot/i.test(ua);
 
-  if (!isCrawler) return NextResponse.next();
+  if (!isCrawler) {
+    // Usuario normal → dejar pasar al index.html (SPA)
+    return new Response(null, {
+      status: 302,
+      headers: { Location: canonicalUrl },
+    });
+  }
 
-  // Servir HTML con OG tags solo a crawlers
   const html = `<!doctype html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <title>${post.title} — EmprenFactor</title>
   <meta name="description" content="${post.description}" />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="EmprenFactor" />
   <meta property="og:title" content="${post.title}" />
@@ -54,8 +50,6 @@ export default async function middleware(request) {
   <meta property="og:image:height" content="630" />
   <meta property="og:url" content="${canonicalUrl}" />
   <meta property="og:locale" content="es_NI" />
-
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${post.title}" />
   <meta name="twitter:description" content="${post.description}" />
@@ -67,7 +61,7 @@ export default async function middleware(request) {
 </body>
 </html>`;
 
-  return new NextResponse(html, {
+  return new Response(html, {
     status: 200,
     headers: { 'Content-Type': 'text/html; charset=utf-8' },
   });

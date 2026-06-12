@@ -18,6 +18,11 @@ export default async function middleware(request) {
       description: 'En Nicaragua, el emprendimiento tiene rostro femenino. Más del 70% de los emprendimientos surgen por necesidad y cerca del 47% del trabajo por cuenta propia es realizado por mujeres.',
       image: 'https://emprenfactor.vercel.app/ImgArt/EmprendedorFemenino.webp',
     },
+    'rompe-tus-propias-barreras-transforma-las-excusas-en-accion': {
+      title: 'Rompe tus propias barreras: transforma las excusas en acción',
+      description: 'Si alguna vez has pensado en iniciar un negocio, probablemente también hayas encontrado razones para no hacerlo. Sin embargo, la mayoría de estas barreras pueden superarse con aprendizaje, creatividad y acción.',
+      image: 'https://emprenfactor.vercel.app/ImgArt/EmprendimientoExperiencia.webp',
+    },
   };
 
   const post = posts[slug];

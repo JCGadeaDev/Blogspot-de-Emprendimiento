@@ -15,7 +15,7 @@ service cloud.firestore {
       // Cualquier visitante puede CREAR un comentario nuevo
       // (siempre llegan con approved: false para moderación)
       allow create: if
-        request.resource.data.keys().hasAll(['name', 'comment', 'approved', 'timestamp']) &&
+        request.resource.data.keys().hasAll(['name', 'comment', 'approved']) &&
         request.resource.data.approved == false &&
         request.resource.data.name is string &&
         request.resource.data.name.size() > 0 &&

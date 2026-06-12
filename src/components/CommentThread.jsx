@@ -287,7 +287,7 @@ const CommentThread = ({ postId, postTitle }) => {
                                     color: '#c0392b',
                                     marginBottom: '0.75rem',
                                 }}>
-                                    Error al enviar. Por favor intenta de nuevo.
+                                    No se pudo enviar el comentario. Verifica tu conexión e intenta de nuevo.
                                 </p>
                             )}
                             <button

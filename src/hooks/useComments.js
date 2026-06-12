@@ -55,14 +55,20 @@ export const useComments = (postId) => {
      * @param {{ name: string, email: string, comment: string, postTitle: string }} data
      */
     const addComment = async ({ name, email, comment, postTitle }) => {
-        // 1. Save to Firestore (pending moderation)
-        await addDoc(collection(db, 'comments', String(postId), 'entries'), {
-            name,
-            email,          // stored but never shown publicly
-            comment,
-            approved: false,
-            timestamp: serverTimestamp(),
-        });
+        // 1. Save to Firestore (pending moderation) with a 10s timeout guard
+        const timeout = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('timeout')), 10000)
+        );
+        await Promise.race([
+            addDoc(collection(db, 'comments', String(postId), 'entries'), {
+                name,
+                email,
+                comment,
+                approved: false,
+                timestamp: serverTimestamp(),
+            }),
+            timeout,
+        ]);
 
         // 2. Notify owner by email via Formspree (non-blocking)
         if (FORMSPREE_COMMENTS_ID) {
@@ -77,9 +83,7 @@ export const useComments = (postId) => {
                     articulo: postTitle,
                     nota: 'Aprueba o rechaza en https://console.firebase.google.com',
                 }),
-            }).catch(() => {
-                // Notification failure is non-critical
-            });
+            }).catch(() => {});
         }
     };
 

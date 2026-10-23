@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomeSection from './components/HomeSection';
-import PostCard from './components/PostCard';
+import FeaturedCarousel from './components/FeaturedCarousel';
 import BlogArticlesSection from './components/BlogArticlesSection';
 import CommunitySection from './components/CommunitySection';
 import AboutUsSection from './components/AboutUsSection';
@@ -131,6 +131,10 @@ const Header = ({ navLinks }) => {
     );
 };
 
+// Newest first, so a new post shows up without touching this section
+const FEATURED_LIMIT = 6;
+const featuredPosts = [...blogPosts].sort((a, b) => b.id - a.id).slice(0, FEATURED_LIMIT);
+
 // ── Main (home) page ───────────────────────────────────────────────
 const MainPage = () => {
     const [filterCategory, setFilterCategory] = useState(null);
@@ -196,24 +200,7 @@ const MainPage = () => {
                     </div>
                 </div>
 
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
-                    gap: '1.5rem',
-                }}>
-                    {blogPosts.slice(0, 3).map((post, index) => (
-                        <div key={post.id} className={`animate-fade-in-up delay-${index + 2}`}>
-                            <PostCard
-                                title={post.title}
-                                description={post.excerpt}
-                                imageUrl={post.imageUrl}
-                                category={post.category}
-                                date={post.date}
-                                slug={post.slug}
-                            />
-                        </div>
-                    ))}
-                </div>
+                <FeaturedCarousel posts={featuredPosts} />
             </section>
 
             <BlogArticlesSection posts={displayedPosts} setFilter={setFilterCategory} />

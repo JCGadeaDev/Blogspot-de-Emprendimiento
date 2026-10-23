@@ -137,6 +137,52 @@ a { text-decoration: none; color: inherit; }
   transform: scale(1.07);
 }
 
+/* ─── Featured Carousel ──────────────────────────── */
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  /* room so the card hover lift and shadow are not clipped */
+  padding: 12px 2px 3rem;
+  margin: -12px -2px -2rem;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+.carousel-slide {
+  flex: 0 0 calc((100% - 3rem) / 3);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+@media (max-width: 960px) {
+  .carousel-slide { flex-basis: calc((100% - 1.5rem) / 2); }
+}
+@media (max-width: 600px) {
+  .carousel-slide { flex-basis: 86%; }
+}
+.carousel-btn {
+  width: 44px; height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--black);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.carousel-btn:hover:not(:disabled) {
+  background: var(--amber);
+  border-color: var(--amber);
+}
+.carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
 /* ─── Article Rows ───────────────────────────────── */
 .article-row {
   padding: 2rem 0;

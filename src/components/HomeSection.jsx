@@ -1,10 +1,11 @@
 import React from 'react';
+import { blogPosts } from '../data/blogPosts';
 
 const HomeSection = () => {
     const stats = [
         { num: '10+', label: 'Años de experiencia' },
-        { num: '6',   label: 'Artículos publicados' },
-        { num: '4',   label: 'Categorías' },
+        { num: String(blogPosts.length), label: 'Artículos publicados' },
+        { num: String(new Set(blogPosts.map(post => post.category)).size), label: 'Categorías' },
     ];
 
     return (

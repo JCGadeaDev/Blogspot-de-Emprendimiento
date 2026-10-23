@@ -72,6 +72,31 @@ const blogPosts = [
             'Cada obstáculo que enfrenta un emprendedor puede verse desde dos perspectivas: como una razón para detenerse o como una oportunidad para crecer. La falta de experiencia puede impulsar el aprendizaje, la falta de tiempo puede fortalecer la disciplina, la falta de dinero puede estimular la creatividad y las limitaciones para desarrollar un prototipo pueden ayudar a validar ideas de manera más inteligente. El éxito no depende de tener todas las condiciones ideales, sino de aprovechar los recursos disponibles para avanzar un paso a la vez.',
         ],
     },
+    {
+        id: 4,
+        slug: 'las-oportunidades-de-negocio-estan-mas-cerca-de-lo-que-imaginas',
+        title: 'Las oportunidades de negocio están más cerca de lo que imaginas',
+        category: 'Emprendimiento',
+        date: '23 de octubre, 2026',
+        readTime: 3,
+        excerpt: 'Muchas veces, una buena idea para emprender no nace de una gran invención, sino de algo que vivimos todos los días. Detrás de las pequeñas molestias cotidianas puede esconderse una oportunidad de negocio.',
+        imageUrl: '/ImgArt/Articulo4.webp',
+        content: [
+            'Muchas veces, una buena idea para emprender no nace de una gran invención, sino de algo que vivimos todos los días.',
+            '¿Has esperado demasiado tiempo por un pedido? ¿Compraste un producto que no cumplió tus expectativas? ¿O buscaste un servicio sencillo y nadie lo ofrecía de la manera que necesitabas? Detrás de esas pequeñas molestias puede esconderse una oportunidad.',
+            'Emprender no siempre significa inventar algo nuevo, tener mucho dinero o una idea extraordinaria. También puede ser tan simple como observar lo que sucede a tu alrededor y encontrar cómo mejorar la vida de otras personas.',
+            'Las pequeñas molestias también son oportunidades',
+            'Imaginá que visitás una pulpería y no encontrás los precios visibles. Tenés que preguntar por cada producto y al final comprás menos de lo que necesitabas. ¿La solución? Colocar precios claros, organizar mejor los artículos o preparar paquetes básicos para facilitar la compra.',
+            'Otro ejemplo: pedís un servicio de reparación en tu casa. El trabajo es bueno, pero nunca te confirman la hora, no responden mensajes y te dejan esperando. El problema no es la calidad, sino la comunicación. Un aviso de horario, un mensaje cuando van en camino y un presupuesto claro harían toda la diferencia.',
+            'En ambos casos, la oportunidad no está en crear algo nuevo, sino en hacer mejor lo que ya existe.',
+            'Observá tu día a día',
+            'No necesitás recorrer la ciudad buscando ideas. Podés empezar prestando atención a tus propias experiencias:',
+            '• Al comprar un producto: ¿es fácil encontrarlo?, ¿su precio es claro?, ¿el empaque facilita su uso?',
+            '• Al recibir un servicio: ¿te atienden a tiempo?, ¿explican bien lo que vas a pagar?, ¿resuelven tu necesidad sin complicaciones?',
+            '• En tus actividades cotidianas: ¿qué te hace perder tiempo?, ¿qué tarea es complicada?, ¿qué necesitan las personas de tu comunidad y aún no encuentran con facilidad?',
+            'Las respuestas pueden revelar oportunidades ligadas a la comodidad, el ahorro de tiempo, la confianza o la atención al cliente.',
+        ],
+    },
     
 
 ];

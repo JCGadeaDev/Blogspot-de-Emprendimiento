@@ -23,6 +23,11 @@ export default async function middleware(request) {
       description: 'Si alguna vez has pensado en iniciar un negocio, probablemente también hayas encontrado razones para no hacerlo. Sin embargo, la mayoría de estas barreras pueden superarse con aprendizaje, creatividad y acción.',
       image: 'https://emprenfactor.vercel.app/ImgArt/EmprendimientoExperiencia.webp',
     },
+    'las-oportunidades-de-negocio-estan-mas-cerca-de-lo-que-imaginas': {
+      title: 'Las oportunidades de negocio están más cerca de lo que imaginas',
+      description: 'Muchas veces, una buena idea para emprender no nace de una gran invención, sino de algo que vivimos todos los días. Detrás de las pequeñas molestias cotidianas puede esconderse una oportunidad de negocio.',
+      image: 'https://emprenfactor.vercel.app/ImgArt/Articulo4.webp',
+    },
   };
 
   const post = posts[slug];
